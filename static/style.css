@@ -1,0 +1,23 @@
+textarea {
+    width:100%;
+}
+
+input[type=submit] {
+    margin-top:10px;
+}
+
+#map {
+    width: 500px;
+    height: 500px;
+    background-color: grey;
+}
+
+.map{
+    box-sizing: border-box;
+    max-width: 500px;
+    width: 100%;
+}
+
+#search_bar{
+    margin-bottom: 20px;
+}

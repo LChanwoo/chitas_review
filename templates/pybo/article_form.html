@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <form method="post">
+        {% csrf_token %}
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+        <div clase="mb-3" >
+            <label for="subject" class="form-label">가게 검색</label>
+            <div class="row p-3" >
+                <input type="text" class="col" name="keyword" id="search_bar"
+                       value="" placeholder="가게이름을 입력해주세요">
+                <button type="submit" class="col-auto btn btn-primary">검색하기</button>
+            </div>
+        </div>
+        <div class="mb-3 map">
+            <div id="map" style="width: 100%;height: 500px;background-color: grey;"></div>
+            <input type="hidden" class="form-control" name="locate_x" id="locate_x"
+                   value="{{ form.locate_x.value|default_if_none:'' }}">
+            <input type="hidden" class="form-control" name="locate_y" id="locate_y"
+                   value="{{ form.locate_y.value|default_if_none:'' }}">
+                
+        </div>
+        <div class="mb-3">
+            <label for="place_name" class="form-label">가게 이름</label>
+            <input type="text" class="form-control" name="place_name" id="store_name"
+            value="{{ form.place_name.value|default_if_none:'' }}" readonly>
+            <label for="phone" class="form-label">전화번호</label>
+            <input type="text" class="form-control" name="phone" id="phone"
+            value="{{ form.phone.value|default_if_none:'' }}" readonly>
+            <label for="road_address_name" class="form-label">주소</label>
+            <input type="text" class="form-control" name="road_address_name" id="road_address_name"
+            value="{{ form.road_address_name.value|default_if_none:'' }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="subject" class="form-label">제목</label>
+            <input type="text" class="form-control" name="subject" id="subject"
+                   value="{{ form.subject.value|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" name="content"
+                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">제로페이 가능</label>
+            <input type="checkbox" id="zeropay">
+        </div>
+        <div class="ml-auto">
+            <button type="submit" class="btn btn-primary ml">저장하기</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3f1e40239e29f140d2b4357aaf8790cb"></script>
+<script type='text/javascript'>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(37.5574814787209, 127.173488088873), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+    
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
+<script type="text/javascript">
+    document.getElementById('search_bar').addEventListener('keydown', function (e) {
+        if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+            searchPlaces();
+        }
+    });
+</script>
+{% endblock %}

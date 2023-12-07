@@ -1,0 +1,9 @@
+# Ignore the __pycache__ directory
+__pycache__
+# Ignore the migrations directory
+*/migrations/*
+!*/migrations/__init__.py
+# Ignore the local temp file
+backup
+# Ignore the database
+db.sqlite3
