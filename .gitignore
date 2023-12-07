@@ -7,3 +7,5 @@ __pycache__
 backup
 # Ignore the database
 db.sqlite3
+# Ignore the environment variables
+.env

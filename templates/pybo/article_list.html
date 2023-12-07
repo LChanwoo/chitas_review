@@ -35,7 +35,7 @@
                 {{ article_list.paginator.count|sub:article_list.start_index|sub:forloop.counter0|add:1 }}
             </td>
             <td class="text-start">
-                <a href="{% url 'pybo:detail' article.id %}">{{ article.subject }}</a>
+                <a href="{% url 'pybo:detail' article.id %}" style="text-decoration: none; color: black;"><span>{{ article.subject }}</span></a>
                 {% if article.comment_set.count > 0 %}
                 <span class="text-danger small mx-2">{{ article.comment_set.count }}</span>
                 {% endif %}

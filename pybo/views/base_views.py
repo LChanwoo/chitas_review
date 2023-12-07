@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
+from django.db.models import Q, Avg
 from ..models import Article
 
 l_order_list = ('-create_date','-voter','create_date','voter')
@@ -35,8 +35,7 @@ def detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     article.hits += 1
     article.save()
-    print(l_order)
     paginator = Paginator(article.comment_set.all().order_by(l_order), 5)
     page_obj = paginator.get_page(page)
-    context = {'article': article, 'page_obj': page_obj, 'page': page, 'l_order': l_order }  
+    context = {'article': article, 'page_obj': page_obj, 'page': page, 'l_order': l_order, }  
     return render(request, 'pybo/article_detail.html', context)

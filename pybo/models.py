@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,AbstractUser
 
 class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_article')
@@ -23,3 +23,11 @@ class Comment(models.Model):
     create_date = models.DateTimeField() # 작성일시
     modify_date = models.DateTimeField(null=True, blank=True) # 수정일시
     voter = models.ManyToManyField(User, related_name='voter_comment')
+
+# class Rating(models.Model):
+#     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article_ratings')
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_ratings')
+#     stars = models.IntegerField(default=0, null=True)
+
+#     class Meta:
+#         unique_together = ['article', 'user']  # 각 사용자가 한 게시물에 대해 한 번만 평점을 줄 수 있도록 함

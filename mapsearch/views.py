@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 import requests
-import json
+from config.settings import env
 
-REST_API_KEY = "a382c419760c032a0a3b78e1e7daffbb"
+# REST API 키 불러오기
+REST_API_KEY = env('REST_API_KEY')
 
 def keyword(request):
     url = "https://dapi.kakao.com/v2/local/search/keyword.json"
@@ -24,7 +25,6 @@ def keyword(request):
     if response.status_code == 200:
         # JSON 형식의 응답 데이터를 파이썬 객체로 변환
         data=response.json()
-        print(data)
         locate = float(x)+float(y)
         if len(data["documents"]) == 0:
             return JsonResponse({"error": "검색 결과가 없습니다."})
@@ -32,7 +32,6 @@ def keyword(request):
         for e in data["documents"]:
             if abs(locate - (float(e["x"])+float(e["y"]))) < abs(locate - (float(data["documents"][closest]["x"])+float(data["documents"][closest]["y"]))):
                 closest = data["documents"].index(e)
-        print(data["documents"][closest])
         data.update({"closest": data["documents"][closest]})
 
     else:
