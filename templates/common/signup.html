@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container my-3">
+    <!-- 로그인 버튼 클릭 시 /common/login에 post 방식으로 요청을 전송 -->
     <form method="post" action="{% url 'common:signup' %}">
+        {% comment %} 
+            {% csrf_token %}은 Django 템플릿에서 사용되는 템플릿 태그. CSRF는 Cross-Site Request Forgery의 약자로, 
+            웹 애플리케이션에서 중요한 작업을 수행하는 요청이 사용자의 의도와 무관하게 이루어지는 공
+            격을 막기 위한 보안 메커니즘. Django에서는 모든 POST 요청에 대해 CSRF 토큰을 사용하여 이러한 공격을 방어한다. 
+            이 토큰은 사용자가 현재 세션에 로그인되어 있고, 애플리케이션에서 제공하는 양식을 통해 데이터를 제출할 때 함께 
+            제출되어야 한다.
+        {% endcomment %}
         {% csrf_token %}
+        <!-- form에 error발생 시 로드되는 html 파일 -->
         {% include "form_errors.html" %}
         <div class="mb-3">
             <label for="username">사용자 이름</label>

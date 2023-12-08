@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>치타의 맛집평가 (*´ω｀*)</title>
     <style>
+        /* 배너 이미지 */
         #banner{
             background-image: url('{% static 'banner.png' %}');
             background-size: cover;
@@ -22,31 +23,23 @@
             min-width: 100px;
             width: 100%;
             height: 200px;
-            {% comment %} height: 100vh; {% endcomment %}
         };
-        body{
-            {% comment %} background-image: url('{% static 'chita.png' %}');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            opacity: 0.9; {% endcomment %}
-        }
     </style>
     <script src="{% static 'bootstrap.min.js' %}"></script>
-
+    <!-- 카카오맵 sdk -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3f1e40239e29f140d2b4357aaf8790cb&libraries=services,clusterer,drawing"></script>
+    <!-- django 서버와 api 통신을 위한 axios.js 패키지 -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div id="banner"></div>
-    {% comment %} <img src="{% static 'chita.png' %}" alt="pybo logo"> {% endcomment %}
 <!-- 네비게이션바 -->
 {% include "navbar.html" %}
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 {% block content %}
 {% endblock %}
-
+{% block script%}
+{% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 <!-- Bootstrap JS -->
 <script src="{% static 'bootstrap.min.js' %}"></script>

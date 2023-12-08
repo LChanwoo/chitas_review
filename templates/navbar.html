@@ -1,7 +1,8 @@
 <!-- 네비게이션바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'pybo:index' %}">Pybo</a>
+        <a class="navbar-brand" href="{% url 'pybo:index' %}">치타의 맛집 (*´ω｀*)</a>
+        {% comment %} 네비게이션바가 작아졌을 때 토글 버튼이 나타나도록 함 {% endcomment %}
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -13,13 +14,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    {% comment %} 로그인 했을 경우 로그아웃 버튼을 보여줌  {% endcomment %}
                     {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+                    {% comment %} 로그인 하지 않았을 때는 로그인 버튼을 보여줌 {% endcomment %}
                     {% else %}
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
                     {% endif %}
                 </li>
                 <li>
+                    {% comment %} 로그인 하지 않았을 때 회원가입 버튼을 보여줌 {% endcomment %}
                     {% if not user.is_authenticated %}
                     <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
                     {% endif %}

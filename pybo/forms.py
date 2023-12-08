@@ -2,6 +2,7 @@ from django import forms
 from pybo.models import Article, Comment
 
 
+# 게시글 폼
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article  # 사용할 모델
